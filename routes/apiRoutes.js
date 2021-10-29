@@ -2,6 +2,7 @@ import express from 'express';
 const router = express.Router();
 
 router.route('/artists')
+  .get((req, res) => {
   try{
       console.log('you touched /artists with GET');
       res.json({data: data});
@@ -12,7 +13,7 @@ router.route('/artists')
   })
 
   .put((req, res) => {
-    try{console.log('you touched /companies with PUT');
+    try{console.log('you touched /artists with PUT');
     res.json({data: data});}
     catch (err) {
       console.log(error);
@@ -22,7 +23,7 @@ router.route('/artists')
 
   .post((req, res) => {
     try{
-      console.log('you touched /companies with POST');
+      console.log('you touched /artists with POST');
       res.json({data: data});}
     catch (err) {
       console.log(error);
@@ -32,7 +33,7 @@ router.route('/artists')
 
   .delete((req, res) => {
     try{
-      console.log('you touched /companies with DELETE');
+      console.log('you touched /artists with DELETE');
       res.json({data: data});
     }
     catch (err) {
