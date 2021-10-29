@@ -1,9 +1,11 @@
 import express from 'express';
+
 const router = express.Router();
 
+// Elvis
 router.route('/artists')
-  .get((req, res) => {
-  try{
+  .get(async(req, res) => {
+    try {
       console.log('you touched /artists with GET');
       res.json({data: data});
     } catch (err) {
@@ -12,74 +14,110 @@ router.route('/artists')
     }
   })
 
-  .put((req, res) => {
-    try{console.log('you touched /artists with PUT');
-    res.json({data: data});}
-    catch (err) {
+  .put(async(req, res) => {
+    try {
+      console.log('you touched /artists with PUT');
+      res.json({data: data});
+    } catch (err) {
       console.log(error);
       res.json({error: error});
     }
   })
 
-  .post((req, res) => {
-    try{
+  .post(async(req, res) => {
+    try {
       console.log('you touched /artists with POST');
-      res.json({data: data});}
-    catch (err) {
+      res.json({data: data});
+    } catch (err) {
       console.log(error);
       res.json({error: error});
     }
   })
 
-  .delete((req, res) => {
-    try{
+  .delete(async(req, res) => {
+    try {
       console.log('you touched /artists with DELETE');
       res.json({data: data});
-    }
-    catch (err) {
+    } catch (err) {
       console.log(error);
       res.json({error: error});
     }
-  })
+  });
 
+// Sean
 router.route('/companies')
-  .get(async(req,res) => {
-    try{
+  .get(async(req, res) => {
+    try {
       console.log('you touched /companies with GET');
       res.json({data: data});
-    }
-    catch(err){
+    } catch (err) {
       console.log(err);
-      res.json({error:err});
-    }})
-  .put(async(req,res) => {
-    try{
+      res.json({error: err});
+    }
+  })
+  .put(async(req, res) => {
+    try {
       console.log('you touched /companies with PUT');
       res.json({data: data});
+    } catch (err) {
+      console.log(err);
+      res.json({error: err});
     }
-    catch(err){
-      console.log(err)
-      res.json({error:err})
+  })
+  .post(async(req, res) => {
+    try {
+      console.log('you touched /companies with POST');
+      res.json({data: data});
+    } catch (err) {
+      console.log(err);
+      res.json({error: err});
     }
-    })
-    .post(async(req,res) => {
-      try{
-        console.log('you touched /companies with POST');
-        res.json({data: data});
-      }
-      catch(err){
-        console.log(err)
-        res.json({error:err})
-      }
-    })
-    .delete(async(req,res) => {
-      try{
-        console.log('you touched /companies with DELETE');
-        res.json({data: data});
-      }
-      catch(err){
-        console.log(err)
-        res.json({error:err})
-      }
-    })
+  })
+  .delete(async(req, res) => {
+    try {
+      console.log('you touched /companies with DELETE');
+      res.json({data: data});
+    } catch (err) {
+      console.log(err);
+      res.json({error: err});
+    }
+  });
 
+// Nikky
+router.route('/musical_career')
+  .get(async(req, res) => {
+    try {
+      console.log('you touched /musical_career with GET');
+      res.json({data: data});
+    } catch (err) {
+      console.log(err);
+      res.json({error: err});
+    }
+  })
+  .put(async(req, res) => {
+    try {
+      console.log('you touched /musical_career with PUT');
+      res.json({data: data});
+    } catch (err) {
+      console.log(err);
+      res.json({error: err});
+    }
+  })
+  .post(async(req, res) => {
+    try {
+      console.log('you touched /musical_career with POST');
+      res.json({data: data});
+    } catch (err) {
+      console.log(err);
+      res.json({error: err});
+    }
+  })
+  .delete(async(req, res) => {
+    try {
+      console.log('you touched /musical_career with DELETE');
+      res.json({data: data});
+    } catch (err) {
+      console.log(err);
+      res.json({error: err});
+    }
+  });
