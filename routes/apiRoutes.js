@@ -121,3 +121,46 @@ router.route('/musical_career')
       res.json({error: err});
     }
   });
+
+
+//Thitna 
+router.route('/musical_awards')
+  .get(async(req, res) => {
+    try {
+      console.log('you touched /musical_awards with GET');
+      res.json({data: data});
+    } catch (err) {
+      console.log(error);
+      res.json({error: error});
+    }
+  })
+
+  .put(async(req, res) => {
+    try {
+      console.log('you touched /musical_awards with PUT');
+      res.json({data: data});
+    } catch (err) {
+      console.log(error);
+      res.json({error: error});
+    }
+  })
+
+  .post(async(req, res) => {
+    try {
+      console.log('you touched /musical_awards with POST');
+      res.json({data: data});
+    } catch (err) {
+      console.log(error);
+      res.json({error: error});
+    }
+  })
+
+  .delete(async(req, res) => {
+    try {
+      console.log('you touched /musical_awards with DELETE');
+      res.json({data: data});
+    } catch (err) {
+      console.log(error);
+      res.json({error: error});
+    }
+  });
