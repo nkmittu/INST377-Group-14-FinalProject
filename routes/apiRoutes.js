@@ -122,8 +122,7 @@ router.route('/musical_career')
     }
   });
 
-
-//Thitna 
+// Thitna 
 router.route('/musical_awards')
   .get(async(req, res) => {
     try {
@@ -164,3 +163,5 @@ router.route('/musical_awards')
       res.json({error: error});
     }
   });
+
+export default router;
