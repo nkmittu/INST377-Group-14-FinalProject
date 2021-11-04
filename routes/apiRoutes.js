@@ -1,4 +1,8 @@
 import express from 'express';
+import sequelize from 'sequelize';
+import {
+  companyGet, companyPost, companyPut, companyDelete
+} from './controllers/companiesController';
 
 const router = express.Router();
 
@@ -48,8 +52,11 @@ router.route('/artists')
 router.route('/companies')
   .get(async(req, res) => {
     try {
+      const result = await db.sequelizeDB.query(companyGet, {
+        type: sequelize.QueryTypes.SELECT
+      });
       console.log('you touched /companies with GET');
-      res.json({data: data});
+      res.json(result);
     } catch (err) {
       console.log(err);
       res.json({error: err});
@@ -57,8 +64,12 @@ router.route('/companies')
   })
   .put(async(req, res) => {
     try {
+      const result = await db.sequelizeDB.query(companyPut, {
+        replacements: { company_name: req.company_name, artist_id: req.artist_id },
+        type: sequelize.QueryTypes.UPDATE
+      });
       console.log('you touched /companies with PUT');
-      res.json({data: data});
+      res.json(result);
     } catch (err) {
       console.log(err);
       res.json({error: err});
@@ -66,8 +77,17 @@ router.route('/companies')
   })
   .post(async(req, res) => {
     try {
+      const result = await db.sequelizeDB.query(companyPost, {
+        replacements: {
+          company_id: req.company_id,
+          artist_id: req.artist_id,
+          company_name: req.company_name,
+          industry: req.industry 
+        },
+        type: sequelize.QueryTypes.INSERT
+      });
       console.log('you touched /companies with POST');
-      res.json({data: data});
+      res.json(result);
     } catch (err) {
       console.log(err);
       res.json({error: err});
@@ -75,8 +95,12 @@ router.route('/companies')
   })
   .delete(async(req, res) => {
     try {
+      const result = await db.sequelizeDB.query(companyDelete, {
+        replacements: { company_name: req.company_id, artist_id: req.company_id },
+        type: sequelize.QueryTypes.DELETE
+      });
       console.log('you touched /companies with DELETE');
-      res.json({data: data});
+      res.json(result);
     } catch (err) {
       console.log(err);
       res.json({error: err});
