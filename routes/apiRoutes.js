@@ -1,8 +1,6 @@
 import express from 'express';
 import sequelize from 'sequelize';
-import {
-  companyGet, companyPut, companyPost, companyDelete
-} from '../server/controllers/companiesController';
+import companyControllers from '../server/controllers/companiesController.js';
 
 const router = express.Router();
 
@@ -52,7 +50,7 @@ router.route('/artists')
 router.route('/companies')
   .get(async(req, res) => {
     try {
-      const result = await db.sequelizeDB.query(companyGet, {
+      const result = await db.sequelizeDB.query(companyControllers.companyGet, {
         type: sequelize.QueryTypes.SELECT
       });
       console.log('you touched /companies with GET');
@@ -64,7 +62,7 @@ router.route('/companies')
   })
   .put(async(req, res) => {
     try {
-      const result = await db.sequelizeDB.query(companyPut, {
+      const result = await db.sequelizeDB.query(companyControllers.companyPut, {
         replacements: { company_name: req.company_name, artist_id: req.artist_id },
         type: sequelize.QueryTypes.UPDATE
       });
@@ -77,7 +75,7 @@ router.route('/companies')
   })
   .post(async(req, res) => {
     try {
-      const result = await db.sequelizeDB.query(companyPost, {
+      const result = await db.sequelizeDB.query(companyControllers.companyPost, {
         replacements: {
           company_id: req.company_id,
           artist_id: req.artist_id,
@@ -95,7 +93,7 @@ router.route('/companies')
   })
   .delete(async(req, res) => {
     try {
-      const result = await db.sequelizeDB.query(companyDelete, {
+      const result = await db.sequelizeDB.query(companyControllers.companyDelete, {
         replacements: { company_name: req.company_id, artist_id: req.company_id },
         type: sequelize.QueryTypes.DELETE
       });

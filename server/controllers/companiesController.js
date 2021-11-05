@@ -14,6 +14,9 @@ VALUES
 (:company_id,:artist_id,:company_name,:indsutry);`;
 const companyDelete = `DELETE FROM companies
 WHERE companies.company_id = :company_id;`;
-export default {
-  companyGet, companyPut, companyPost, companyDelete
+export default{
+  companyGet,
+  companyPut,
+  companyPost,
+  companyDelete
 };
