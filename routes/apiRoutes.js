@@ -1,6 +1,8 @@
+/* eslint-disable camelcase */
 import express from 'express';
 import sequelize from 'sequelize';
 import companyControllers from '../server/controllers/companiesController.js';
+import musical_careerController from '../server/controllers/musical_careerController.js';
 
 const router = express.Router();
 
@@ -80,7 +82,7 @@ router.route('/companies')
           company_id: req.company_id,
           artist_id: req.artist_id,
           company_name: req.company_name,
-          industry: req.industry 
+          industry: req.industry
         },
         type: sequelize.QueryTypes.INSERT
       });
@@ -109,6 +111,9 @@ router.route('/companies')
 router.route('/musical_career')
   .get(async(req, res) => {
     try {
+      const result = await db.sequelizeDB.query(musical_careerController.musical_careerGet, {
+        type: sequelize.QueryTypes.SELECT
+      });
       console.log('you touched /musical_career with GET');
       res.json({data: data});
     } catch (err) {
@@ -118,6 +123,16 @@ router.route('/musical_career')
   })
   .put(async(req, res) => {
     try {
+      const result = await db.sequelizeDB.query(musical_careerController.musical_careerPut, {
+        replacements: {
+          album_count: req.album_count,
+          genre: req.genre,
+          debut_date: req.debut_date,
+          tour_count: req.tour_count,
+          artist_id: req.artist_id
+        },
+        type: sequelize.QueryTypes.UPDATE
+      });
       console.log('you touched /musical_career with PUT');
       res.json({data: data});
     } catch (err) {
@@ -127,6 +142,17 @@ router.route('/musical_career')
   })
   .post(async(req, res) => {
     try {
+      const result = await db.sequelizeDB.query(musical_careerController.musical_careerPost, {
+        replacements: {
+          career_id: req.career_id,
+          artist_id: req.artist_id,
+          album_count: req.album_count,
+          genre: req.genre,
+          debut_date: req.debut_date,
+          tour_count: req.tour_count
+        },
+        type: sequelize.QueryTypes.INSERT
+      });
       console.log('you touched /musical_career with POST');
       res.json({data: data});
     } catch (err) {
@@ -136,6 +162,10 @@ router.route('/musical_career')
   })
   .delete(async(req, res) => {
     try {
+      const result = await db.sequelizeDB.query(musical_careerController.musical_careerDelete, {
+        replacements: { career_id: req.career_id },
+        type: sequelize.QueryTypes.DELETE
+      });
       console.log('you touched /musical_career with DELETE');
       res.json({data: data});
     } catch (err) {
@@ -144,7 +174,7 @@ router.route('/musical_career')
     }
   });
 
-// Thitna 
+// Thitna
 router.route('/musical_awards')
   .get(async(req, res) => {
     try {
