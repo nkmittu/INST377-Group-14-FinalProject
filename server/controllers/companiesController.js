@@ -12,7 +12,7 @@ const companyPost = `INSERT INTO companies
 (company_id,artist_id,company_name,industry)
 VALUES
 (:company_id,:artist_id,:company_name,:indsutry);`;
-const companyDelete= `DELETE FROM companies
+const companyDelete = `DELETE FROM companies
 WHERE companies.company_id = :company_id;`;
 export default {
   companyGet, companyPut, companyPost, companyDelete

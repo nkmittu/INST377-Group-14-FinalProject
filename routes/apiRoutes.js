@@ -1,8 +1,8 @@
 import express from 'express';
 import sequelize from 'sequelize';
 import {
-  companyGet, companyPost, companyPut, companyDelete
-} from './controllers/companiesController';
+  companyGet, companyPut, companyPost, companyDelete
+} from '../server/controllers/companiesController';
 
 const router = express.Router();
 
