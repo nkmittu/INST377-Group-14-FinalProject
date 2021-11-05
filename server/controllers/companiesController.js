@@ -15,5 +15,8 @@ VALUES
 const companyDelete = `DELETE FROM companies
 WHERE companies.company_id = :company_id;`;
 export default {
-  companyGet, companyPut, companyPost, companyDelete
+  companyGet,
+  companyPut,
+  companyPost,
+  companyDelete
 };
