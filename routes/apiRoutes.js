@@ -10,8 +10,11 @@ const router = express.Router();
 router.route('/artists')
   .get(async(req, res) => {
     try {
+      const result = await db.sequelizeDB.query(artistsGet, {
+        type: sequelize.QueryTypes.SELECT
+      });
       console.log('you touched /artists with GET');
-      res.json({data: data});
+      res.json({result});
     } catch (err) {
       console.log(error);
       res.json({error: 'something went wrong'});
@@ -20,8 +23,12 @@ router.route('/artists')
 
   .put(async(req, res) => {
     try {
+      const result = await db.sequelizeDB.query(artistsPut, {
+        replacements: {artist_id: req.artist_id},
+        type: sequelize.QueryTypes.UPDATE
+      });
       console.log('you touched /artists with PUT');
-      res.json({data: data});
+      res.json({result});
     } catch (err) {
       console.log(error);
       res.json({error: error});
@@ -30,8 +37,12 @@ router.route('/artists')
 
   .post(async(req, res) => {
     try {
+      const result = await db.sequelizeDB.query(artistsPost, {
+        replacements: {artist_id: req.artist_id,},
+        type: sequelize.QueryTypes.INSERT
+      });
       console.log('you touched /artists with POST');
-      res.json({data: data});
+      res.json({result});
     } catch (err) {
       console.log(error);
       res.json({error: error});
@@ -40,8 +51,12 @@ router.route('/artists')
 
   .delete(async(req, res) => {
     try {
+      const result = await db.sequelizeDB.query(artistsDelete, {
+        replacements: {artist_name: req.artist_id},
+        type: sequelize.QueryTypes.DELETE
+      });
       console.log('you touched /artists with DELETE');
-      res.json({data: data});
+      res.json({result});
     } catch (err) {
       console.log(error);
       res.json({error: error});
