@@ -13,3 +13,4 @@ const artistsDelete= `DELETE FROM artists
 WHERE artists.artist_id = :artist_id;`;
 export default {
   artistsGet, artistsPut, artistsPost, artistsDelete
+}

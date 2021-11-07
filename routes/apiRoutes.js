@@ -11,7 +11,7 @@ const router = express.Router();
 router.route('/artists')
   .get(async(req, res) => {
     try {
-      const result = await db.sequelizeDB.query(artistsGet, {
+      const result = await db.sequelizeDB.query(Artists_Controller.artistsGet, {
         type: sequelize.QueryTypes.SELECT
       });
       console.log('you touched /artists with GET');
@@ -24,7 +24,7 @@ router.route('/artists')
 
   .put(async(req, res) => {
     try {
-      const result = await db.sequelizeDB.query(artistsPut, {
+      const result = await db.sequelizeDB.query(Artists_Controller.artistsPut, {
         replacements: {artist_id: req.artist_id},
         type: sequelize.QueryTypes.UPDATE
       });
@@ -38,7 +38,7 @@ router.route('/artists')
 
   .post(async(req, res) => {
     try {
-      const result = await db.sequelizeDB.query(artistsPost, {
+      const result = await db.sequelizeDB.query(Artists_Controller.artistsPost, {
         replacements: {artist_id: req.artist_id,},
         type: sequelize.QueryTypes.INSERT
       });
@@ -52,7 +52,7 @@ router.route('/artists')
 
   .delete(async(req, res) => {
     try {
-      const result = await db.sequelizeDB.query(artistsDelete, {
+      const result = await db.sequelizeDB.query(Artists_Controller.artistsDelete, {
         replacements: {artist_name: req.artist_id},
         type: sequelize.QueryTypes.DELETE
       });
