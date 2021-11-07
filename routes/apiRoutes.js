@@ -3,6 +3,7 @@ import express from 'express';
 import sequelize from 'sequelize';
 import companyControllers from '../server/controllers/companiesController.js';
 import musical_careerController from '../server/controllers/musical_careerController.js';
+import Artists_Controller from '../server/controllers/Artists_Controller.js';
 
 const router = express.Router();
 
