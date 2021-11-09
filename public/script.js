@@ -5,14 +5,14 @@ async function companyActions() {
   const endpoint = '/api/companies';
   const request = await fetch(endpoint);
   const cities = await request.json();
-  console.log(cities)
+  const suggestions = document.querySelector('.suggestions');
   console.log('company actions ready')
 
   function findMatches(wordToMatch, cities) {
     return cities.filter((place) => {
       const regex = new RegExp(wordToMatch, 'gi');
       // eslint-disable-next-line max-len
-      return place.stage_name.match(regex) || place.company_name.match(regex)|| place.birth_name.match(regex);
+      return place.stage_name.match(regex) || place.company_name.match(regex) || place.birth_name.match(regex);
     });
   }
   function displayMatches(event) {
@@ -27,8 +27,11 @@ async function companyActions() {
     }).join('');
     console.log(html);
     suggestions.innerHTML = html;
+    if (!event.target.value) {
+      suggestions.innerHTML = '';
+    }
   }
-  searchInput.addEventListener('change', (evt) => { 
+  searchInput.addEventListener('keyup', (evt) => { 
     displayMatches(evt);
     console.log('listening'); });
 }
