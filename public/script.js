@@ -48,19 +48,19 @@ async function artistsActions() {
   console.log('artists')
 
   function findMatches(wordToMatch, artist) {
-    return cities.filter((place) => {
+    return artist.filter((celebs) => {
       const regex = new RegExp(wordToMatch, 'gi');
       
-      return place.stage_name.match(regex) || place.company_name.match(regex) || place.birth_name.match(regex);
+      return celebs.stage_name.match(regex) || celebs.birth_name.match(regex);
     });
   }
-  function displayMatches(event) {
+  function displayMatches(celebs) {
     const matchArray = findMatches(event.target.value, artist);
     console.log(matchArray);
-    const html = matchArray.map((place) => {
+    const html = matchArray.map((celebs) => {
       return `
         <li>
-          <span class = 'name'>${place.birth_name} also known as ${place.stage_name} works with ${place.company_name}</span>
+          <span class = 'name'>${celebs.birth_name} also known as ${celebs.stage_name}</span>
         </li>
       `;
     }).join('');
