@@ -1,4 +1,4 @@
-//Sean
+// Sean
 /* eslint-disable arrow-body-style */
 /* eslint-disable linebreak-style */
 async function companyActions() {
