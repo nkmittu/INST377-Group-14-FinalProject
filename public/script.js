@@ -1,68 +1,69 @@
+/* eslint-disable max-len */
+/* eslint-disable no-shadow */
 // Sean
 /* eslint-disable arrow-body-style */
 /* eslint-disable linebreak-style */
+const searchInput = document.querySelector('.search');
+const suggestions = document.querySelector('.suggestions');
+
 async function companyActions() {
-  const searchInput = document.querySelector('.search');
   const endpoint = '/api/companies';
   const request = await fetch(endpoint);
-  const cities = await request.json();
-  const suggestions = document.querySelector('.suggestions');
-  console.log('company actions ready')
+  const brands = await request.json();
+  console.log('company actions ready');
 
-  function findMatches(wordToMatch, cities) {
-    return cities.filter((place) => {
+  function findMatches(wordToMatch, brands) {
+    return brands.filter((place) => {
       const regex = new RegExp(wordToMatch, 'gi');
       // eslint-disable-next-line max-len
       return place.stage_name.match(regex) || place.company_name.match(regex) || place.birth_name.match(regex);
     });
   }
   function displayMatches(event) {
-    const matchArray = findMatches(event.target.value, cities);
+    const matchArray = findMatches(event.target.value, brands);
     console.log(matchArray);
     const html = matchArray.map((place) => {
       return `
-        <li>
-          <span class = 'name'>${place.birth_name} also known as ${place.stage_name} works with ${place.company_name}</span>
-        </li>
-      `;
+                      <li>
+                        <span class="name"><span class="hl">${place.stage_name}</span>, <span class="hl">${place.birth_name}</span></span>
+                      </li>
+                    `;
     }).join('');
-    console.log(html);
-    suggestions.innerHTML = html;
-    if (!event.target.value) {
+    if (event.target.value) {
+      suggestions.innerHTML = html;
+    } else {
       suggestions.innerHTML = '';
     }
   }
-  searchInput.addEventListener('keyup', (evt) => { 
-    displayMatches(evt);
-    console.log('listening'); });
+
+  searchInput.addEventListener('change', (evt) => { displayMatches(evt); });
+  searchInput.addEventListener('keyup', (evt) => { displayMatches(evt); });
 }
 window.onload = companyActions;
 
-//Elvis
+// Elvis
 async function artistsActions() {
-  const searchInput = document.querySelector('.search');
   const endpoint = '/api/artists';
   const request = await fetch(endpoint);
-  const cities = await request.json();
-  const suggestions = document.querySelector('.suggestions');
-  console.log('artists')
+  const artist = await request.json();
+  console.log('artists');
 
   function findMatches(wordToMatch, artist) {
-    return artist.filter((celebs) => {
+    return artist.filter((place) => {
       const regex = new RegExp(wordToMatch, 'gi');
-      
-      return celebs.stage_name.match(regex) || celebs.birth_name.match(regex);
+
+      return place.stage_name.match(regex) || place.birth_name.match(regex);
     });
   }
-  function displayMatches(celebs) {
+  function displayMatches(event) {
     const matchArray = findMatches(event.target.value, artist);
     console.log(matchArray);
-    const html = matchArray.map((celebs) => {
+    const html = matchArray.map((place) => {
       return `
-        <li>
-          <span class = 'name'>${celebs.birth_name} also known as ${celebs.stage_name}</span>
-        </li>
-      `;
+                      <li>
+                        <span class="name"><span class="hl">${place.stage_name}</span>, <span class="hl">${place.birth_name}</span></span>
+                      </li>
+                    `;
     }).join('');
     console.log(html);
     suggestions.innerHTML = html;
@@ -70,10 +71,7 @@ async function artistsActions() {
       suggestions.innerHTML = '';
     }
   }
-  searchInput.addEventListener('keyup', (evt) => { 
-    displayMatches(evt);
-    console.log('listening'); });
+  searchInput.addEventListener('change', (evt) => { displayMatches(evt); });
+  searchInput.addEventListener('keyup', (evt) => { displayMatches(evt); });
 }
 window.onload = artistsActions;
-
-

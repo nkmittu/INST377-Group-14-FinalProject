@@ -1,0 +1,72 @@
+<html>
+<head>
+    <meta charset='UTF-8'/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css">
+    <link rel="stylesheet" href="styles.css">
+    <title>INST377 Group 14 Final Project - Celebrities</title>
+</head>
+<body>
+    <div class="wrapper">
+        <div class="container">
+            <div class='box is-size 8 has-background-link has-text-white'>
+                <h1>Celebrity Search</h1>
+            </div>
+        </div>
+        <div class="menu-container">
+            <div class="menu">
+                <a href='index.html'> Home</a>
+                <a href='artists.html'> Artists</a>
+                <a href='awards.html'> Awards</a>
+                <a href='brands.html'> Brands/Companies</a>
+                <a href='about.html'> About</a>
+                <a href="https://github.com/nkmittu/INST377-Group-14-FinalProject">GitHub Repository</a>
+            </div>
+        </div>
+        <p>This is our artist search page! Use the search bar below to search for artists!</p>
+        <form class = "search-form">
+            <input type = "text" class= "search" placeholder="Enter a name or company">
+            <ul class = "suggestions"></ul>
+        </form>
+        <script>
+            async function musicalCareerActions() {
+                const endpoint = '/api/musical_career';
+                const request = await fetch(endpoint);
+                const careers = await request.json();
+              
+                function findMatches(wordToMatch, careers) {
+                  return careers.filter((place) => {
+                    const regex = new RegExp(wordToMatch, 'gi');
+                    return place.stage_name.match(regex) || place.company_name.match(regex) || place.birth_name.match(regex);
+                  });
+                }
+              
+                function displayMatches(event) {
+                  const matchArray = findMatches(event.target.value, careers);
+                  console.log(matchArray)
+                  const html = matchArray.map((place) => {
+                    const regex = new RegExp(event.target.value, 'gi');
+                    return `
+                                    <li>
+                                        <span class="name"><span class="hl">${place.stage_name}</span>, <span class="hl">${place.company_name}</span>,<span class="hl">${place.birth_name}</span>
+                                    </li>
+                                  `;
+                  }).join('');
+                  if (event.target.value) {
+                  suggestions.innerHTML = html;
+                } else {
+                    suggestions.innerHTML = '';
+                }
+                }
+              
+                const searchInput = document.querySelector('.search');
+                const suggestions = document.querySelector('.suggestions');
+              
+                searchInput.addEventListener('change', (evt) => { displayMatches(evt); });
+                searchInput.addEventListener('keyup', (evt) => { displayMatches(evt); });
+              }
+              window.onload = musicalCareerActions;
+          </script>
+      </body>
+    </html>
+</body>
+</html>
