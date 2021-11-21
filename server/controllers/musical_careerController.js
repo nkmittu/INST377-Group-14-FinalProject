@@ -1,11 +1,15 @@
 /* eslint-disable camelcase */
 const musical_careerGet = `SELECT a.artist_id,
-   a.birth_name, a.stage_name,
-   m.album_count, m.genre, m.debut_date, m.tour_count
- FROM
-   artists a
- INNER JOIN musical_career m
-   ON a.artist_id = m.artist_id;`;
+a.birth_name,
+a.stage_name,
+m.album_count,
+m.genre,
+m.debut_date,
+m.tour_count
+FROM
+artists a
+INNER JOIN musical_career m 
+ON a.artist_id = m.artist_id;`;
 const musical_careerPut = `UPDATE musical_career
 SET album_count=:album_count
 SET genre=:genre

@@ -1,5 +1,9 @@
 const artistsGet = `SELECT a.artist_id,
-  a.birth_name
+  a.birth_name,
+  a.stage_name,
+  a.birth_date,
+  a.age,
+  a.spouse
 FROM
   artists a ; `;
 const artistsPut = `UPDATE artists

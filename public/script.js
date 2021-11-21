@@ -10,7 +10,9 @@ async function companyActions() {
   const endpoint = '/api/companies';
   const request = await fetch(endpoint);
   const brands = await request.json();
-  console.log('company actions ready');
+  const companysearchInput = document.querySelector('.companysearch');
+  const companysuggestions = document.querySelector('.companysuggestions');
+  console.log(brands);
 
   function findMatches(wordToMatch, brands) {
     return brands.filter((place) => {
@@ -25,28 +27,27 @@ async function companyActions() {
     const html = matchArray.map((place) => {
       return `
                       <li>
-                        <span class="name"><span class="hl">${place.stage_name}</span>, <span class="hl">${place.birth_name}</span></span>
+                        <span class="name"><span class="hl">${place.birth_name}</span> also known as <span class="hl">${place.stage_name}</span> works with company${place.company_name} in the ${place.industry} industry.</span>
                       </li>
                     `;
     }).join('');
     if (event.target.value) {
-      suggestions.innerHTML = html;
+      companysuggestions.innerHTML = html;
     } else {
-      suggestions.innerHTML = '';
+      companysuggestions.innerHTML = '';
     }
   }
 
-  searchInput.addEventListener('change', (evt) => { displayMatches(evt); });
-  searchInput.addEventListener('keyup', (evt) => { displayMatches(evt); });
+  companysearchInput.addEventListener('change', (evt) => { displayMatches(evt); });
+  companysearchInput.addEventListener('keyup', (evt) => { displayMatches(evt); });
 }
-window.onload = companyActions;
-
 // Elvis
 async function artistsActions() {
   const endpoint = '/api/artists';
   const request = await fetch(endpoint);
-  const artist = await request.json();
-  console.log('artists');
+  const artistarray = await request.json();
+  const artist = artistarray.result;
+  console.log(artist);
 
   function findMatches(wordToMatch, artist) {
     return artist.filter((place) => {
@@ -61,7 +62,7 @@ async function artistsActions() {
     const html = matchArray.map((place) => {
       return `
                       <li>
-                        <span class="name"><span class="hl">${place.stage_name}</span>, <span class="hl">${place.birth_name}</span></span>
+                        <span class="name"><span class="hl">${place.birth_name}</span> also known as <span class="hl">${place.stage_name}</span> was born on ${place.birth_date} and is ${place.age} years old.</span>
                       </li>
                     `;
     }).join('');
@@ -74,4 +75,8 @@ async function artistsActions() {
   searchInput.addEventListener('change', (evt) => { displayMatches(evt); });
   searchInput.addEventListener('keyup', (evt) => { displayMatches(evt); });
 }
-window.onload = artistsActions;
+function start() {
+  companyActions();
+  artistsActions();
+}
+window.onload = start;

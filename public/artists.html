@@ -27,45 +27,7 @@
             <input type = "text" class= "search" placeholder="Search">
             <ul class = "suggestions"></ul>
         </form>
-        <script>
-            async function musicalCareerActions() {
-                const endpoint = '/api/musical_career';
-                const request = await fetch(endpoint);
-                const careers = await request.json();
-              
-                function findMatches(wordToMatch, careers) {
-                  return careers.filter((place) => {
-                    const regex = new RegExp(wordToMatch, 'gi');
-                    return place.stage_name.match(regex) || place.company_name.match(regex) || place.birth_name.match(regex);
-                  });
-                }
-              
-                function displayMatches(event) {
-                  const matchArray = findMatches(event.target.value, careers);
-                  console.log(matchArray)
-                  const html = matchArray.map((place) => {
-                    const regex = new RegExp(event.target.value, 'gi');
-                    return `
-                                    <li>
-                                        <span class="name"><span class="hl">${place.stage_name}</span>, <span class="hl">${place.company_name}</span>,<span class="hl">${place.birth_name}</span>
-                                    </li>
-                                  `;
-                  }).join('');
-                  if (event.target.value) {
-                  suggestions.innerHTML = html;
-                } else {
-                    suggestions.innerHTML = '';
-                }
-                }
-              
-                const searchInput = document.querySelector('.search');
-                const suggestions = document.querySelector('.suggestions');
-              
-                searchInput.addEventListener('change', (evt) => { displayMatches(evt); });
-                searchInput.addEventListener('keyup', (evt) => { displayMatches(evt); });
-              }
-              window.onload = musicalCareerActions;
-          </script>
+        <script src=script.js></script>
       </body>
     </html>
 </body>
