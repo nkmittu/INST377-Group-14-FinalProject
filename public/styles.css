@@ -5,10 +5,23 @@
     padding: 20px 0;
 }
 
-  .menu {
+.menu {
     border: 1px solid #fff;
     width: 900px;
     display: flex;
     justify-content: space-between;
 
+}
+
+.container {
+  max-width: 1000px;
+  margin-top: 10px;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: ‘Segoe UI’, Candara, ‘Bitstream Vera Sans’, ‘DejaVu Sans’,
+    ‘Bitsream Vera Sans’, ‘Trebuchet MS’, Verdana, ‘Verdana Ref’, sans-serif;
+  background-color: white;
 }
