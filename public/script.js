@@ -27,7 +27,7 @@ async function companyActions() {
     const html = matchArray.map((place) => {
       return `
                       <li>
-                        <span class="name"><span class="hl">${place.birth_name}</span> also known as <span class="hl">${place.stage_name}</span> works with company${place.company_name} in the ${place.industry} industry.</span>
+                        <span class="name"><span class="hl">${place.birth_name}</span> also known as <span class="hl">${place.stage_name}</span> works with company ${place.company_name} in the ${place.industry} industry.</span>
                       </li>
                     `;
     }).join('');
