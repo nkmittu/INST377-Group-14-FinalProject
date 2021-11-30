@@ -132,7 +132,7 @@ router.route('/musical_career')
         type: sequelize.QueryTypes.SELECT
       });
       console.log('you touched /musical_career with GET');
-      res.json({data: data});
+      res.json(result);
     } catch (err) {
       console.log(err);
       res.json({error: err});

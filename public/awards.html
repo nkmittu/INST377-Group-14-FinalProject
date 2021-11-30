@@ -15,14 +15,60 @@
         </div>
         <div class="menu-container">
             <div class="menu">
-            <a href='index.html'> Main Page</a>
-            <a href='celebs.html'> Celebrity Search</a>
-            <a href='awards.html'> Award Search</a>
-            <a href='brands.html'> Brand Search</a>
-            <a href='about.html'> About Page</a>
-            <a href="https://github.com/nkmittu/INST377-Group-14-FinalProject">GitHub Repository</a>
+                <a href='index.html'> Home</a>
+                <a href='artists.html'> Artists</a>
+                <a href='awards.html'> Awards</a>
+                <a href='brands.html'> Brands/Companies</a>
+                <a href='about.html'> About</a>
+                <a href="https://github.com/nkmittu/INST377-Group-14-FinalProject">GitHub Repository</a>
             </div>
         </div>
-        <p>This is our Award Search Page!</p>
+        <div class = 'column is-10 is-offset-1'>
+            <p>This is our Award Search Page! Below you can search for different awards and receive more information on them.</p>
+            <form class = "search-form">
+                <input type = "text" class= "search" placeholder="Search">
+                <ul class = "suggestions"></ul>
+            </form>
+        </div>
+        <script>
+            async function musicalCareerActions() {
+                const endpoint = '/api/musical_career';
+                const request = await fetch(endpoint);
+                const careers = await request.json();
+                console.log(careers)
+              
+                function findMatches(wordToMatch, careers) {
+                  return careers.filter((place) => {
+                    const regex = new RegExp(wordToMatch, 'gi');
+                    return place.stage_name.match(regex) || place.birth_name.match(regex);
+                  });
+                }
+              
+                function displayMatches(event) {
+                  const matchArray = findMatches(event.target.value, careers);
+                  console.log(matchArray)
+                  const html = matchArray.map((place) => {
+                    const regex = new RegExp(event.target.value, 'gi');
+                    return `
+                                    <li>
+                                        <span class="name"><span class="hl">${place.birth_name}</span> also known as <span class="hl"></span><span class="hl">${place.stage_name} has music in ${place.genre} and has ${place.album_count} albums released. They also debuted on ${place.debut_date} and have gone on ${place.tour_count} tours.</span>
+                                    </li>
+                                  `;
+                  }).join('');
+                  if (event.target.value) {
+                  suggestions.innerHTML = html;
+                } else {
+                    suggestions.innerHTML = '';
+                }
+                }
+              
+                const searchInput = document.querySelector('.search');
+                const suggestions = document.querySelector('.suggestions');
+              
+                searchInput.addEventListener('change', (evt) => { displayMatches(evt); });
+                searchInput.addEventListener('keyup', (evt) => { displayMatches(evt); });
+              }
+              window.onload = musicalCareerActions;
+          </script>
 </body>
 </html>

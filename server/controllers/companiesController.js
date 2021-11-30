@@ -1,7 +1,8 @@
 const companyGet = `SELECT a.artist_id,
   a.birth_name,
   a.stage_name,
-  c.company_name
+  c.company_name,
+  c.industry
 FROM
   artists a
 INNER JOIN companies c 
