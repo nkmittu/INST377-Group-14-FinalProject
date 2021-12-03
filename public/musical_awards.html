@@ -19,6 +19,7 @@
                 <a href='artists.html'> Artists</a>
                 <a href='awards.html'> Awards</a>
                 <a href='brands.html'> Brands/Companies</a>
+                <a href='musical_awards.html'> Musical Awards</a>
                 <a href='about.html'> About</a>
                 <a href="https://github.com/nkmittu/INST377-Group-14-FinalProject">GitHub Repository</a>
             </div>
@@ -51,7 +52,7 @@
                     const regex = new RegExp(event.target.value, 'gi');
                     return `
                                     <li>
-                                        <span class="name"><span class="hl">${place.birth_name}</span> also known as <span class="hl"></span><span class="hl">${place.stage_name} has won ${place.bilboard.hits} billboard hits and has won ${place.grammy_awards} grammy awards.</span>
+                                        <span class="name"><span class="hl">${place.birth_name}</span> also known as <span class="hl"></span><span class="hl">${place.stage_name} has won ${place.bilboard_hits} billboard hits and has won ${place.grammy_awards} grammy awards.</span>
                                     </li>
                                   `;
                   }).join('');

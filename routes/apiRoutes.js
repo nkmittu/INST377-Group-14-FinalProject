@@ -201,7 +201,7 @@ router.route('/musical_awards')
         type: sequelize.QueryTypes.SELECT 
       }); 
       console.log('you touched /musical_awards with GET');
-      res.json({result});
+      res.json(result);
     } catch (err) {
       console.log(error);
       res.json({error: error});
