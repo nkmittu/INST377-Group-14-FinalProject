@@ -18,8 +18,7 @@ const musical_awardsDelete = `DELETE FROM musical_awards
 WHERE musical_awards.awards_id = :awards_id;`;
 export default {
   musical_awardsGet,
-  musical_awardsPut,
+  muscical_awardsPut,
   musical_awardsPost,
   musical_awardsDelete
 };
-
