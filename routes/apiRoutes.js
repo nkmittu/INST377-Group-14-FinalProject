@@ -5,7 +5,7 @@ import db from '../database/initializeDB.js';
 import companyControllers from '../server/controllers/companiesController.js';
 import musical_careerController from '../server/controllers/musical_careerController.js';
 import Artists_Controller from '../server/controllers/Artists_Controller.js';
-
+import musical_awardsController from '../server/controllers/musical_awardsController';
 const router = express.Router();
 
 // Elvis
@@ -195,8 +195,12 @@ router.route('/musical_career')
 router.route('/musical_awards')
   .get(async(req, res) => {
     try {
+      const result = await db.sequelizeDB.query (musical_awardsController.musical_awardsGet,{
+        type: sequelize.QueryTypes.SELECT 
+      }
+        ) ; 
       console.log('you touched /musical_awards with GET');
-      res.json({data: data});
+      res.json({result});
     } catch (err) {
       console.log(error);
       res.json({error: error});
@@ -205,8 +209,13 @@ router.route('/musical_awards')
 
   .put(async(req, res) => {
     try {
+      const result = await db.sequelizeDB.query (musical_awardsController.musical_awardsPut,{
+        replacements: { bilboard_hits: req.bilboard_hits, artist_id: req.artist_id}, 
+        type: sequelize.QueryTypes.UPDATE
+      }
+        ) ; 
       console.log('you touched /musical_awards with PUT');
-      res.json({data: data});
+      res.json({result});
     } catch (err) {
       console.log(error);
       res.json({error: error});
@@ -215,8 +224,13 @@ router.route('/musical_awards')
 
   .post(async(req, res) => {
     try {
+      const result = await db.sequelizeDB.query (musical_awardsController.musical_awardsPost,{
+        replacements: { bilboard_hits: req.bilboard_hits, artist_id: req.artist_id, awards_id: req.awards_id, grammy_awards: req.grammy_awards}, 
+        type: sequelize.QueryTypes.INSERT
+      }
+        ) ; 
       console.log('you touched /musical_awards with POST');
-      res.json({data: data});
+      res.json({result});
     } catch (err) {
       console.log(error);
       res.json({error: error});
@@ -225,8 +239,13 @@ router.route('/musical_awards')
 
   .delete(async(req, res) => {
     try {
+      const result = await db.sequelizeDB.query (musical_awardsController.musical_awardsDelete,{
+        replacements: { awards_id : req.awards_id } , 
+        type: sequelize.QueryTypes.DELETE
+      }
+        ) ; 
       console.log('you touched /musical_awards with DELETE');
-      res.json({data: data});
+      res.json({result});
     } catch (err) {
       console.log(error);
       res.json({error: error});

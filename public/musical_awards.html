@@ -1,0 +1,74 @@
+<html>
+<head>
+    <meta charset='UTF-8'/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="script" href="script.js">
+    <title>INST377 Group 14: Final Project - Musical Awards</title>
+</head>
+<body>
+    <div class="wrapper">
+        <div class="container">
+            <div class='box is-size 8 has-background-link has-text-white'>
+                <h1>Musical Award Search</h1>
+            </div>
+        </div>
+        <div class="menu-container">
+            <div class="menu">
+                <a href='index.html'> Home</a>
+                <a href='artists.html'> Artists</a>
+                <a href='awards.html'> Awards</a>
+                <a href='brands.html'> Brands/Companies</a>
+                <a href='about.html'> About</a>
+                <a href="https://github.com/nkmittu/INST377-Group-14-FinalProject">GitHub Repository</a>
+            </div>
+        </div>
+        <div class = 'column is-10 is-offset-1'>
+            <p>This is our Musical Award Search Page! Below you can search for different awards and receive more information on them.</p>
+            <form class = "search-form">
+                <input type = "text" class= "search" placeholder="Search">
+                <ul class = "suggestions"></ul>
+            </form>
+        </div>
+        <script>
+            async function musicalCareerActions() {
+                const endpoint = '/api/musical_awards';
+                const request = await fetch(endpoint);
+                const careers = await request.json();
+                console.log(careers)
+              
+                function findMatches(wordToMatch, careers) {
+                  return careers.filter((place) => {
+                    const regex = new RegExp(wordToMatch, 'gi');
+                    return place.stage_name.match(regex) || place.birth_name.match(regex);
+                  });
+                }
+              
+                function displayMatches(event) {
+                  const matchArray = findMatches(event.target.value, careers);
+                  console.log(matchArray)
+                  const html = matchArray.map((place) => {
+                    const regex = new RegExp(event.target.value, 'gi');
+                    return `
+                                    <li>
+                                        <span class="name"><span class="hl">${place.birth_name}</span> also known as <span class="hl"></span><span class="hl">${place.stage_name} has won ${place.bilboard.hits} billboard hits and has won ${place.grammy_awards} grammy awards.</span>
+                                    </li>
+                                  `;
+                  }).join('');
+                  if (event.target.value) {
+                  suggestions.innerHTML = html;
+                } else {
+                    suggestions.innerHTML = '';
+                }
+                }
+              
+                const searchInput = document.querySelector('.search');
+                const suggestions = document.querySelector('.suggestions');
+              
+                searchInput.addEventListener('change', (evt) => { displayMatches(evt); });
+                searchInput.addEventListener('keyup', (evt) => { displayMatches(evt); });
+              }
+              window.onload = musicalCareerActions;
+          </script>
+</body>
+</html>
