@@ -62,4 +62,13 @@ h1 {
   font-size: 1.75em;
   justify-content: center;
 }
+img {
+  width: 25%;
+  height: 25%;
+}
+.about-page {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
 
