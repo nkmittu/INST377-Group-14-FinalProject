@@ -18,6 +18,34 @@
   margin-top: 10px;
 }
 
+.photo-grid-container {
+  display: flex;
+  justify-content: center;
+}
+
+.photo-grid {
+  width: 2000px;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  flex-direction: row-reverse;
+  align-items: center;
+}
+
+.first-item {
+  order: 1;
+}
+
+.last-item {
+  order: -1;
+}
+
+.photo-grid-item {
+  border: 1px solid #fff;
+  width: 450px;
+  height: 450px;
+}
+
 body {
   margin: 0;
   padding: 0;
@@ -25,9 +53,11 @@ body {
     ‘Bitsream Vera Sans’, ‘Trebuchet MS’, Verdana, ‘Verdana Ref’, sans-serif;
   background-color: white;
 }
+
 ul {
   list-style-type: disc;
-  }
+}
+
 li {
   background-color: #485FC7;
   margin-top: 10px;
@@ -35,6 +65,7 @@ li {
   border-radius: 2px;
   color: white;
 }
+
 .search-form {
   margin-bottom: 40px;
   display: flex;
@@ -50,6 +81,7 @@ li {
   font-size: 14px;
   text-align: center;
 }
+
 p {
   display: flex;
   font-size: 1.5em;
